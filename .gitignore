@@ -1,0 +1,10 @@
+node_modules/
+*.pyc
+__pycache__/
+*.db
+.env
+.DS_Store
+*.log
+data/*.json
+data/*.md
+!.gitkeep
