@@ -152,11 +152,18 @@ class BundesligaWebScraper:
         
         # Versuche verschiedene Selektoren
         news_container = None
-        for selector in selectors.get("container", [
+        container_val = selectors.get("container", [
             "article", ".news-list", ".news-overview",
             ".article-list", "[class*='news']", "main"
-        ]):
-            news_container = soup.select_one(selector)
+        ])
+        # String in Liste normalisieren
+        if isinstance(container_val, str):
+            container_val = [container_val]
+        for selector in container_val:
+            try:
+                news_container = soup.select_one(selector)
+            except Exception:
+                news_container = None
             if news_container:
                 break
         
