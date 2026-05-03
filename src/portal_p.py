@@ -10,8 +10,8 @@ from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Optional
 
-from src.scrapers.website_scraper import BundesligaWebScraper, get_club_configs, ClubNewsItem
-from src.youtube.scraper import BundesligaYouTubeScraper
+from scrapers.website_scraper import BundesligaWebScraper, get_club_configs, ClubNewsItem
+from youtube.scraper import BundesligaYouTubeScraper
 
 
 CLUB_BADGES = {

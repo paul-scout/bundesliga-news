@@ -4,8 +4,8 @@ import json
 from pathlib import Path
 from datetime import datetime
 
-from src.scrapers.website_scraper import BundesligaWebScraper, get_club_configs
-from src.portal import generate_portal
+from scrapers.website_scraper import BundesligaWebScraper, get_club_configs
+from portal import generate_portal
 
 
 def main(scrape: bool = True, clubs: list[str] = None, output: str = "docs/index.html"):
@@ -44,7 +44,7 @@ def main(scrape: bool = True, clubs: list[str] = None, output: str = "docs/index
         cache_path = Path("data/scraped_news.json")
         if cache_path.exists():
             with open(cache_path) as f:
-                from src.scrapers.website_scraper import ClubNewsItem
+                from scrapers.website_scraper import ClubNewsItem
                 raw = json.load(f)
             all_articles = [ClubNewsItem(**r) for r in raw]
             print(f"📂 {len(all_articles)} Artikel aus Cache geladen")

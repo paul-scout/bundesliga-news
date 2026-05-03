@@ -10,8 +10,8 @@ from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Optional
 
-from src.scrapers.website_scraper import BundesligaWebScraper, get_club_configs, ClubNewsItem
-from src.youtube.scraper import BundesligaYouTubeScraper
+from .scrapers.website_scraper import BundesligaWebScraper, get_club_configs, ClubNewsItem
+from .youtube.scraper import BundesligaYouTubeScraper
 
 
 CLUB_BADGES = {
@@ -70,14 +70,10 @@ def generate_portal(
     """
     
     # Filter: nur Artikel der letzten Tage
-    recent_articles = []
-    for a in scraped_articles:
-        pa = a.published_at
-        if pa and isinstance(pa, str):
-            try: pa = datetime.fromisoformat(pa.replace("Z","+00:00"))
-            except: pa = None
-        if pa and isinstance(pa, datetime) and (datetime.now() - pa).days <= days_back:
-            recent_articles.append(a)
+    recent_articles = [
+        a for a in scraped_articles
+        if a.published_at and (datetime.now() - a.published_at).days <= days_back
+    ]
     
     # Sortiere nach Datum absteigend
     recent_articles.sort(key=lambda a: a.published_at, reverse=True)
